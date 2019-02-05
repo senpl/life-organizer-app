@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/bloc_provider.dart';
 import 'package:flutter_app/models/priority.dart';
+import 'package:flutter_app/models/repeat.dart';
 import 'package:flutter_app/pages/labels/label.dart';
 import 'package:flutter_app/pages/projects/project.dart';
 import 'package:flutter_app/pages/tasks/bloc/add_task_bloc.dart';
@@ -102,9 +103,14 @@ class AddTaskScreen extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.timer),
             title: Text("Reminder"),
-            subtitle: Text("No Reminder"),
+            subtitle: StreamBuilder(
+              stream: createTaskBloc.repeatSelected,
+              initialData: StatusRepeat.REPEAT_NO,
+              builder: (context, snapshot) =>
+                  Text(repeatText[snapshot.data.index]),
+            ),
             onTap: () {
-              showSnackbar(_scaffoldState, "Comming Soon");
+              _showRepeatDialog(createTaskBloc, context);
             },
           )
         ],
@@ -186,6 +192,23 @@ class AddTaskScreen extends StatelessWidget {
         });
   }
 
+  Future<StatusRepeat> _showRepeatDialog(
+      AddTaskBloc createTaskBloc, BuildContext context) async {
+    return await showDialog<StatusRepeat>(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return SimpleDialog(
+            title: const Text('Select Repeat'),
+            children: <Widget>[
+              buildRepeatContainer(context, StatusRepeat.REPEAT_NO),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_2),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_3),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_4),
+            ],
+          );
+        });
+  }
+
   List<Widget> buildProjects(
     AddTaskBloc createTaskBloc,
     BuildContext context,
@@ -258,6 +281,35 @@ class AddTaskScreen extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(12.0),
                 child: Text(priorityText[status.index],
+                    style: TextStyle(fontSize: 18.0)),
+              ),
+            )));
+  }
+
+  GestureDetector buildRepeatContainer(BuildContext context, StatusRepeat status) {
+    AddTaskBloc createTaskBloc = BlocProvider.of(context);
+    return GestureDetector(
+        onTap: () {
+          createTaskBloc.updateRepeat(status);
+          Navigator.pop(context, status);
+        },
+        child: Container(
+            color: status == createTaskBloc.lastRepeatSelection
+                ? Colors.grey
+                : Colors.white,
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 2.0),
+              // decoration: BoxDecoration(
+              //   border: Border(
+              //     left: BorderSide(
+              //       width: 6.0,
+              //       //color: priorityColor[status.index],
+              //     ),
+              //   ),
+              // ),
+              child: Container(
+                margin: const EdgeInsets.all(12.0),
+                child: Text(repeatText[status.index],
                     style: TextStyle(fontSize: 18.0)),
               ),
             )));

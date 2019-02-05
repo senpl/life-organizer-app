@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_app/bloc/bloc_provider.dart';
 import 'package:flutter_app/models/priority.dart';
+import 'package:flutter_app/models/repeat.dart';
 import 'package:flutter_app/pages/labels/label.dart';
 import 'package:flutter_app/pages/labels/label_db.dart';
 import 'package:flutter_app/pages/projects/project.dart';
@@ -16,6 +17,7 @@ class AddTaskBloc implements BlocBase {
   final ProjectDB _projectDB;
   final LabelDB _labelDB;
   Status lastPrioritySelection = Status.PRIORITY_4;
+  StatusRepeat lastRepeatSelection = StatusRepeat.REPEAT_NO;
 
   AddTaskBloc(this._taskDB, this._projectDB, this._labelDB) {
     _loadProjects();
@@ -50,6 +52,10 @@ class AddTaskBloc implements BlocBase {
   BehaviorSubject<Status> _prioritySelected = BehaviorSubject<Status>();
 
   Stream<Status> get prioritySelected => _prioritySelected.stream;
+ 
+  BehaviorSubject<StatusRepeat> _repeatSelected = BehaviorSubject<StatusRepeat>();
+
+  Stream<StatusRepeat> get repeatSelected => _repeatSelected.stream;
 
   BehaviorSubject<int> _dueDateSelected = BehaviorSubject<int>();
 
@@ -130,5 +136,10 @@ class AddTaskBloc implements BlocBase {
 
   void updateDueDate(int millisecondsSinceEpoch) {
     _dueDateSelected.add(millisecondsSinceEpoch);
+  }
+
+  void updateRepeat(StatusRepeat repeat) {
+    _repeatSelected.add(repeat);
+    lastRepeatSelection = repeat;
   }
 }

@@ -1,2 +1,13 @@
-☐ Wysłać do siebie działającą wersję
-☐ dodać potwarzanie zadań
+☐ dodać potwarzanie zadań najprościej
+    ☐ powtarzanie codziennie na początek
+        ☐ Niech pojawią się 2 przyciski
+        ☐ Dodać to jako dropdownButton z examples
+        ☐ Domyślnie wybrany przycisk nie powtarzaj
+        ☐ Niech pojawi się opcja every day
+        ☐ Niech po jej zaznaczeniu zadanie wykonane zmieni date due date na dzień następny
+    ☐ Powtarzanie w dni tygodnia na początek
+    ☐ Niech po kliknięciu pojawi się kontrolka taka jak w Tasks.org ????
+
+☐ podnieść narzędzia do Flutter'a 1.2, bo moze będzie coś szybciej ???
+☐ Domyślnie niech zadania nie mają daty
+
