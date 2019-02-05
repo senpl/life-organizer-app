@@ -46,8 +46,8 @@ class AboutUsScreen extends StatelessWidget {
                     ListTile(
                       leading:
                           Icon(Icons.perm_identity, color: Colors.black),
-                      title: Text("Burhanuddin Rashid"),
-                      subtitle: Text("burhanrashid52"),
+                      title: Text("SkorpEN"),
+                      subtitle: Text("senpl"),
                       onTap: () => launchURL(GITHUB_URL),
                     ),
                     ListTile(
@@ -58,7 +58,7 @@ class AboutUsScreen extends StatelessWidget {
                     ListTile(
                         leading: Icon(Icons.email, color: Colors.black),
                         title: Text("Send an Email"),
-                        subtitle: Text("burhanrashid5253@gmail.com"),
+                        subtitle: Text("urbanekmike@gmail.com"),
                         onTap: () => launchURL(EMAIL_URL)),
                   ],
                 ),
@@ -109,7 +109,7 @@ class AboutUsScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListTile(
-                        subtitle: Text("Copyright 2018 Burhanuddin Rashid"
+                        subtitle: Text("Copyright 2019 Based on work of Burhanuddin Rashid"
                             '\n\nLicensed under the Apache License, Version 2.0 (the "License") you may not use this file except in compliance with the License. You may obtain a copy of the License at'
                             "\n\n\nhttp://www.apache.org/licenses/LICENSE-2.0"
                             '\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.'),

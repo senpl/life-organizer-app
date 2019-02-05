@@ -24,4 +24,4 @@ const String ISSUE_URL = "https://github.com/burhanrashid52/WhatTodo/issues";
 const String README_URL =
     "https://github.com/burhanrashid52/WhatTodo/blob/master/README.md";
 const String EMAIL_URL =
-    "mailto:<burhanrashid5253@gmail.com>?subject=WhatTodo%20Query&body=Hi";
+    "mailto:<urbanekmike@gmail.com>?subject=WhatTodo%20Query&body=Hi";
