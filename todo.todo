@@ -1,10 +1,9 @@
 ☐ dodać potwarzanie zadań najprościej
     ☐ powtarzanie codziennie na początek
         ☐ Niech pojawią się 2 przyciski
-        ☐ Dodać to jako dropdownButton z examples
-        ☐ Domyślnie wybrany przycisk nie powtarzaj
-        ☐ Niech pojawi się opcja every day
-        ☐ Niech po jej zaznaczeniu zadanie wykonane zmieni date due date na dzień następny
+            ✔ Niech pojawi się opcja every day @done (February 5th 2019, 16:22)
+            ☐ Niech po jej zaznaczeniu zadanie wykonane zmieni date due date na dzień następny
+                ☐ Znaleźć, gdzie jest akcja dla complete, i gdy repeat ustawiony na everyday to przenieść na dzień następny.
     ☐ Powtarzanie w dni tygodnia na początek
     ☐ Niech po kliknięciu pojawi się kontrolka taka jak w Tasks.org ????
 

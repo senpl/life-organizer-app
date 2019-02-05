@@ -299,14 +299,6 @@ class AddTaskScreen extends StatelessWidget {
                 : Colors.white,
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 2.0),
-              // decoration: BoxDecoration(
-              //   border: Border(
-              //     left: BorderSide(
-              //       width: 6.0,
-              //       //color: priorityColor[status.index],
-              //     ),
-              //   ),
-              // ),
               child: Container(
                 margin: const EdgeInsets.all(12.0),
                 child: Text(repeatText[status.index],
