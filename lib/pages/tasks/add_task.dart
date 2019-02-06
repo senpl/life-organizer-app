@@ -204,6 +204,7 @@ class AddTaskScreen extends StatelessWidget {
               buildRepeatContainer(context, StatusRepeat.REPEAT_DAYLY),
               buildRepeatContainer(context, StatusRepeat.REPEAT_WEEKLY),
               buildRepeatContainer(context, StatusRepeat.REPEAT_MONTHLY),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_CUSTOM),
             ],
           );
         });

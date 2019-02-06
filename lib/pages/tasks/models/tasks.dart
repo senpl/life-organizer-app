@@ -59,8 +59,7 @@ class Tasks {
           dueDate: map[dbDueDate],
           priority: Status.values[map[dbPriority]],
           tasksStatus: TaskStatus.values[map[dbStatus]],
-          //TODO This is wrongly set? .values[map[dbRepeat]]
-          repeat:StatusRepeat.values[map[dbRepeat]], //StatusRepeat.REPEAT_WEEKLY//[map[dbRepeat]]//StatusRepeat.REPEAT_WEEKLY,
+          repeat:StatusRepeat.values[map[dbRepeat]], 
         );
 }
 

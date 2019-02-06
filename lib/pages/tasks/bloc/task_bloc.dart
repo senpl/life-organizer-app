@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:flutter_app/bloc/bloc_provider.dart';
 import 'package:flutter_app/pages/tasks/task_db.dart';
 import 'package:flutter_app/pages/tasks/models/tasks.dart';
+import 'package:flutter_app/models/repeat.dart';
 
 class TaskBloc implements BlocBase {
   ///
@@ -108,6 +109,19 @@ class TaskBloc implements BlocBase {
     _taskDb.updateTaskStatus(taskID, status).then((value) {
       refresh();
     });
+  }
+
+  void updateRepeat(Tasks task, StatusRepeat repeat) {
+    if(repeat==StatusRepeat.REPEAT_DAYLY){
+      Tasks taskNew=task;
+      DateTime oldDate=new DateTime(task.dueDate);
+      DateTime tomorrow=new DateTime.now().add(new Duration(days: 1));
+      DateTime tomorowRepeated=new DateTime(tomorrow.year, tomorrow.month, tomorrow.day, oldDate.hour, oldDate.minute, oldDate.second, oldDate.millisecond, oldDate.microsecond);
+      taskNew.dueDate=tomorowRepeated.millisecondsSinceEpoch;
+      _taskDb.updateTask(taskNew).then((value) {
+        refresh();
+      });
+    }
   }
 
   void delete(int taskID) {

@@ -4,7 +4,7 @@ import 'package:flutter_app/pages/projects/project.dart';
 import 'package:flutter_app/pages/labels/label.dart';
 import 'package:flutter_app/pages/tasks/models/task_labels.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 
 class TaskDB {
   static final TaskDB _taskDb = TaskDB._internal(AppDatabase.get());
@@ -47,7 +47,7 @@ class TaskDB {
   List<Tasks> _bindData(List<Map<String, dynamic>> result) {
     List<Tasks> tasks = List();
     for (Map<String, dynamic> item in result) {
-        debugPrint('item: '+item.toString());
+        // debugPrint('item: '+item.toString());
       var myTask = Tasks.fromMap(item);
       myTask.projectName = item[Project.dbName];
       myTask.projectColor = item[Project.dbColorCode];
