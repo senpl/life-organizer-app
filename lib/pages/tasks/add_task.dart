@@ -201,9 +201,9 @@ class AddTaskScreen extends StatelessWidget {
             title: const Text('Select Repeat'),
             children: <Widget>[
               buildRepeatContainer(context, StatusRepeat.REPEAT_NO),
-              buildRepeatContainer(context, StatusRepeat.REPEAT_2),
-              buildRepeatContainer(context, StatusRepeat.REPEAT_3),
-              buildRepeatContainer(context, StatusRepeat.REPEAT_4),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_DAYLY),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_WEEKLY),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_MONTHLY),
             ],
           );
         });

@@ -4,6 +4,7 @@ import 'package:flutter_app/pages/projects/project.dart';
 import 'package:flutter_app/pages/labels/label.dart';
 import 'package:flutter_app/pages/tasks/models/task_labels.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/foundation.dart';
 
 class TaskDB {
   static final TaskDB _taskDb = TaskDB._internal(AppDatabase.get());
@@ -46,6 +47,7 @@ class TaskDB {
   List<Tasks> _bindData(List<Map<String, dynamic>> result) {
     List<Tasks> tasks = List();
     for (Map<String, dynamic> item in result) {
+        debugPrint('item: '+item.toString());
       var myTask = Tasks.fromMap(item);
       myTask.projectName = item[Project.dbName];
       myTask.projectColor = item[Project.dbColorCode];
@@ -108,8 +110,8 @@ class TaskDB {
     var db = await _appDatabase.getDb();
     await db.transaction((Transaction txn) async {
       int id = await txn.rawInsert('INSERT OR REPLACE INTO '
-          '${Tasks.tblTask}(${Tasks.dbId},${Tasks.dbTitle},${Tasks.dbProjectID},${Tasks.dbComment},${Tasks.dbDueDate},${Tasks.dbPriority},${Tasks.dbStatus})'
-          ' VALUES(${task.id}, "${task.title}", ${task.projectId},"${task.comment}", ${task.dueDate},${task.priority.index},${task.tasksStatus.index})');
+          '${Tasks.tblTask}(${Tasks.dbId},${Tasks.dbTitle},${Tasks.dbProjectID},${Tasks.dbComment},${Tasks.dbDueDate},${Tasks.dbPriority},${Tasks.dbStatus},${Tasks.dbRepeat})'
+          ' VALUES(${task.id}, "${task.title}", ${task.projectId},"${task.comment}", ${task.dueDate},${task.priority.index},${task.tasksStatus.index},${task.repeat.index})');
       if (id > 0 && labelIDs != null && labelIDs.length > 0) {
         labelIDs.forEach((labelId) {
           txn.rawInsert('INSERT OR REPLACE INTO '

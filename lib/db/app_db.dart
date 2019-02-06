@@ -92,6 +92,7 @@ class AppDatabase {
         "${Tasks.dbPriority} LONG,"
         "${Tasks.dbProjectID} LONG,"
         "${Tasks.dbStatus} LONG,"
+        "${Tasks.dbRepeat} LONG,"
         "FOREIGN KEY(${Tasks.dbProjectID}) REFERENCES ${Project.tblProject}(${Project.dbId}) ON DELETE CASCADE);");
   }
 }

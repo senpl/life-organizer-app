@@ -4,6 +4,7 @@ import 'package:flutter_app/bloc/bloc_provider.dart';
 import 'package:flutter_app/pages/tasks/models/tasks.dart';
 import 'package:flutter_app/pages/tasks/row_task.dart';
 import 'package:flutter_app/utils/app_util.dart';
+import 'package:flutter/foundation.dart';
 
 class TasksPage extends StatelessWidget {
   @override
@@ -40,6 +41,8 @@ class TasksPage extends StatelessWidget {
                               BlocProvider.of<TaskBloc>(context);
                           String message = "";
                           if (direction == DismissDirection.endToStart) {
+                            debugPrint('test: '+list[index].repeat.toString());
+
                             _tasksBloc.updateStatus(
                                 taskID, TaskStatus.COMPLETE);
                             message = "Task completed";

@@ -2,8 +2,11 @@
     ☐ powtarzanie codziennie na początek
         ☐ Niech pojawią się 2 przyciski
             ✔ Niech pojawi się opcja every day @done (February 5th 2019, 16:22)
+            ✔ Niech status będzie everyDay @done (February 6th 2019, 12:08)
+            ✔ naprawić prawidłowe ustawianie repeat z valuesmap @done (February 6th 2019, 15:31)
             ☐ Niech po jej zaznaczeniu zadanie wykonane zmieni date due date na dzień następny
-                ☐ Znaleźć, gdzie jest akcja dla complete, i gdy repeat ustawiony na everyday to przenieść na dzień następny.
+                ☐ Znaleźć, gdzie jest akcja dla complete,
+                ☐ i gdy repeat ustawiony na everyday to przenieść na dzień następny.
     ☐ Powtarzanie w dni tygodnia na początek
     ☐ Niech po kliknięciu pojawi się kontrolka taka jak w Tasks.org ????
 

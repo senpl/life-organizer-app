@@ -25,6 +25,7 @@ class AddTaskBloc implements BlocBase {
     updateDueDate(DateTime.now().millisecondsSinceEpoch);
     _projectSelection.add(Project.getInbox());
     _prioritySelected.add(lastPrioritySelection);
+    _repeatSelected.add(lastRepeatSelection);
   }
 
   BehaviorSubject<List<Project>> _projectController =
@@ -70,6 +71,7 @@ class AddTaskBloc implements BlocBase {
     _projectSelection.close();
     _labelSelected.close();
     _prioritySelected.close();
+    _repeatSelected.close();
     _dueDateSelected.close();
   }
 
@@ -115,8 +117,8 @@ class AddTaskBloc implements BlocBase {
   }
 
   Observable<String> createTask() {
-    return Observable.zip3(selectedProject, dueDateSelected, prioritySelected,
-        (Project project, int dueDateSelected, Status status) {
+    return Observable.zip4(selectedProject, dueDateSelected, prioritySelected, repeatSelected,
+        (Project project, int dueDateSelected, Status status, StatusRepeat statusRepeat) {
       List<int> labelIds = List();
       _selectedLabelList.forEach((label) {
         labelIds.add(label.id);
@@ -127,6 +129,7 @@ class AddTaskBloc implements BlocBase {
         dueDate: dueDateSelected,
         priority: status,
         projectId: project.id,
+        repeat: statusRepeat,
       );
       _taskDB.updateTask(task, labelIDs: labelIds).then((task) {
         Notification.onDone();

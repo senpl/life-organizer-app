@@ -1,4 +1,5 @@
 import 'package:flutter_app/models/priority.dart';
+import 'package:flutter_app/models/repeat.dart';
 import 'package:meta/meta.dart';
 
 class Tasks {
@@ -10,10 +11,13 @@ class Tasks {
   static final dbPriority = "priority";
   static final dbStatus = "status";
   static final dbProjectID = "projectId";
+  static final dbRepeat = "repeat";
+
 
   String title, comment, projectName;
   int id, dueDate, projectId, projectColor;
   Status priority;
+  StatusRepeat repeat;
   TaskStatus tasksStatus;
   List<String> labelList = List();
 
@@ -22,7 +26,8 @@ class Tasks {
       @required this.projectId,
       this.comment = "",
       this.dueDate = -1,
-      this.priority = Status.PRIORITY_4}) {
+      this.priority = Status.PRIORITY_4,
+      this.repeat = StatusRepeat.REPEAT_NO}) {
     if (this.dueDate == -1) {
       this.dueDate = DateTime.now().millisecondsSinceEpoch;
     }
@@ -38,7 +43,8 @@ class Tasks {
       this.comment = "",
       this.dueDate =-1,
       this.priority = Status.PRIORITY_4,
-      this.tasksStatus = TaskStatus.PENDING}) {
+      this.tasksStatus = TaskStatus.PENDING,
+      this.repeat = StatusRepeat.REPEAT_NO}) {
     if (this.dueDate == -1) {
       this.dueDate = DateTime.now().millisecondsSinceEpoch;
     }
@@ -53,6 +59,8 @@ class Tasks {
           dueDate: map[dbDueDate],
           priority: Status.values[map[dbPriority]],
           tasksStatus: TaskStatus.values[map[dbStatus]],
+          //TODO This is wrongly set? .values[map[dbRepeat]]
+          repeat:StatusRepeat.values[map[dbRepeat]], //StatusRepeat.REPEAT_WEEKLY//[map[dbRepeat]]//StatusRepeat.REPEAT_WEEKLY,
         );
 }
 

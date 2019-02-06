@@ -4,9 +4,9 @@ class Repeat {
 
 enum StatusRepeat {
   REPEAT_NO,
-  REPEAT_2,
-  REPEAT_3,
-  REPEAT_4,
+  REPEAT_DAYLY,
+  REPEAT_WEEKLY,
+  REPEAT_MONTHLY,
 }
 
 var repeatText = ["No Repeat", "Every Day", "Every week", "Every Month"];
