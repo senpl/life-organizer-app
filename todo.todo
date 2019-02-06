@@ -6,6 +6,7 @@
             ✔ naprawić prawidłowe ustawianie repeat z valuesmap @done (February 6th 2019, 15:31)
             ✔ Dodać status custom, który będzie zmieniał co okręślony czas @done (February 6th 2019, 15:57)
             ☐ Niech po jej zaznaczeniu zadanie wykonane zmieni date due date na dzień następny
+                ☐ Dodać obsługę weekly i monthly ????
                 ✔ Dodać zadanie z EveryDay ustawionym @done (February 6th 2019, 16:03)
                 ✔ Znaleźć, gdzie jest akcja dla complete, @done (February 6th 2019, 16:30)
                 ✔ i gdy repeat ustawiony na everyday to przenieść na dzień następny. @done (February 6th 2019, 17:11)
