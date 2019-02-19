@@ -50,6 +50,14 @@ class AddTaskBloc implements BlocBase {
 
   List<Label> get selectedLabels => _selectedLabelList;
 
+  BehaviorSubject<bool> _daysSelected = BehaviorSubject<bool>();
+
+  Stream<bool> get daysSelection => _daysSelected.stream;
+
+  List<bool> selectedDaysList = List();
+
+  List<bool> get selectedDays => selectedDaysList;
+
   BehaviorSubject<Status> _prioritySelected = BehaviorSubject<Status>();
 
   Stream<Status> get prioritySelected => _prioritySelected.stream;
@@ -70,6 +78,7 @@ class AddTaskBloc implements BlocBase {
     _labelController.close();
     _projectSelection.close();
     _labelSelected.close();
+    _daysSelected.close();
     _prioritySelected.close();
     _repeatSelected.close();
     _dueDateSelected.close();
@@ -119,10 +128,18 @@ class AddTaskBloc implements BlocBase {
   Observable<String> createTask() {
     return Observable.zip4(selectedProject, dueDateSelected, prioritySelected, repeatSelected,
         (Project project, int dueDateSelected, Status status, StatusRepeat statusRepeat) {
+      List<bool> daysToStore=List();
+      // selectedDaysList
+      daysToStore=selectedDaysList;
+      // .forEach(day){
+      //   daysToStore.add(day);
+      // };
+
       List<int> labelIds = List();
       _selectedLabelList.forEach((label) {
         labelIds.add(label.id);
-      });
+      }
+      );
 
       var task = Tasks.create(
         title: updateTitle,
@@ -131,7 +148,7 @@ class AddTaskBloc implements BlocBase {
         projectId: project.id,
         repeat: statusRepeat,
       );
-      _taskDB.updateTask(task, labelIDs: labelIds).then((task) {
+      _taskDB.updateTask(task, labelIDs: labelIds, selectedDays: daysToStore).then((task) {
         Notification.onDone();
       });
     });

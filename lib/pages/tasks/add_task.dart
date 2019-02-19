@@ -10,12 +10,14 @@ import 'package:flutter_app/pages/tasks/bloc/add_task_bloc.dart';
 import 'package:flutter_app/utils/app_util.dart';
 import 'package:flutter_app/utils/color_utils.dart';
 import 'package:flutter_app/utils/date_util.dart';
+import 'package:flutter_app/pages/tasks/weekday_picker.dart';
 
 class AddTaskScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldState =
       GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
-
+  WeekdayPicker weekdayPicker=new WeekdayPicker();
+  
   @override
   Widget build(BuildContext context) {
     AddTaskBloc createTaskBloc = BlocProvider.of(context);
@@ -112,7 +114,19 @@ class AddTaskScreen extends StatelessWidget {
             onTap: () {
               _showRepeatDialog(createTaskBloc, context);
             },
-          )
+          ),
+          // ListTile(
+          //     leading: Icon(Icons.label),
+          //     title: Text("Enabled days"),
+          //     subtitle: StreamBuilder(
+          //       stream: createTaskBloc.daysSelection,
+          //       initialData: List(),
+          //       builder: (context, snapshot) => Text(snapshot.data),
+          //     ),
+          //     onTap: () {
+          //       _showEnabledDaysDialog(context);
+          //     }),
+          weekdayPicker
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -120,6 +134,7 @@ class AddTaskScreen extends StatelessWidget {
           onPressed: () {
             if (_formState.currentState.validate()) {
               _formState.currentState.save();
+              createTaskBloc.selectedDaysList=weekdayPicker.getEnabledDays();
               createTaskBloc.createTask().listen((value) {
                 Navigator.pop(context, true);
               });
@@ -194,21 +209,41 @@ class AddTaskScreen extends StatelessWidget {
 
   Future<StatusRepeat> _showRepeatDialog(
       AddTaskBloc createTaskBloc, BuildContext context) async {
-    return await showDialog<StatusRepeat>(
+      return await showDialog<StatusRepeat>(
         context: context,
         builder: (BuildContext dialogContext) {
           return SimpleDialog(
             title: const Text('Select Repeat'),
             children: <Widget>[
               buildRepeatContainer(context, StatusRepeat.REPEAT_NO),
-              buildRepeatContainer(context, StatusRepeat.REPEAT_DAYLY),
+              buildRepeatContainer(context, StatusRepeat.REPEAT_DAILY),
               buildRepeatContainer(context, StatusRepeat.REPEAT_WEEKLY),
-              buildRepeatContainer(context, StatusRepeat.REPEAT_MONTHLY),
-              buildRepeatContainer(context, StatusRepeat.REPEAT_CUSTOM),
+              // buildRepeatContainer(context, StatusRepeat.DAYS_OF_WEEK),
+              // buildRepeatContainer(context, StatusRepeat.REPEAT_CUSTOM),
             ],
           );
         });
   }
+
+  // Future<Status> _showEnabledDaysDialog(BuildContext context) async {
+  //   AddTaskBloc createTaskBloc = BlocProvider.of(context);
+  //   return 
+  //   showDialog<Status>(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return StreamBuilder(
+  //             stream: createTaskBloc.labels,
+  //             initialData: List<bool>(),
+  //             builder: (context, snapshot) {
+  //               return new WeekdayPicker();
+  //               // SimpleDialog(
+  //               //   title: const Text('Select Days'),
+  //               //   children: Listnew WeekdayPicker(),
+  //               //   // buildLabels(createTaskBloc, context, snapshot.data),
+  //               // );
+  //             });
+  //       });
+  // }
 
   List<Widget> buildProjects(
     AddTaskBloc createTaskBloc,

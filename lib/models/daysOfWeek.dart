@@ -1,5 +1,5 @@
-class Repeat {
-  final String dbRepeat = "repeat";
+class DaysOfWeek {
+  final String dbEnabledDays = "enabledDays";
 }
 
 enum StatusRepeat {

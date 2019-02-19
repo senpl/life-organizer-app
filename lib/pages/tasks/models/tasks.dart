@@ -12,7 +12,7 @@ class Tasks {
   static final dbStatus = "status";
   static final dbProjectID = "projectId";
   static final dbRepeat = "repeat";
-
+  static final dbReminderType="reminderType";
 
   String title, comment, projectName;
   int id, dueDate, projectId, projectColor;
@@ -20,7 +20,8 @@ class Tasks {
   StatusRepeat repeat;
   TaskStatus tasksStatus;
   List<String> labelList = List();
-
+  List<bool> enabledDaysList = List();
+  
   Tasks.create(
       {@required this.title,
       @required this.projectId,

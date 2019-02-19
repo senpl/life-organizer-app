@@ -11,14 +11,12 @@ class TaskBloc implements BlocBase {
   /// Synchronous Stream to handle the provision of the movie genres
   ///
   StreamController<List<Tasks>> _taskController =
-      StreamController<List<Tasks>>.broadcast();
+      StreamController<List<Tasks>>.broadcast(); 
 
   Stream<List<Tasks>> get tasks => _taskController.stream;
 
   ///
   StreamController<int> _cmdController = StreamController<int>.broadcast();
-
-  //StreamSink get getMovieGenres => _cmdController.sink;
 
   TaskDB _taskDb;
   List<Tasks> _tasksList;
@@ -112,11 +110,20 @@ class TaskBloc implements BlocBase {
   }
 
   void updateRepeat(Tasks task, StatusRepeat repeat) {
-    if(repeat==StatusRepeat.REPEAT_DAYLY){
+    if(repeat==StatusRepeat.REPEAT_DAILY){
       Tasks taskNew=task;
       DateTime oldDate=new DateTime(task.dueDate);
       DateTime tomorrow=new DateTime.now().add(new Duration(days: 1));
       DateTime tomorowRepeated=new DateTime(tomorrow.year, tomorrow.month, tomorrow.day, oldDate.hour, oldDate.minute, oldDate.second, oldDate.millisecond, oldDate.microsecond);
+      taskNew.dueDate=tomorowRepeated.millisecondsSinceEpoch;
+      _taskDb.updateTask(taskNew).then((value) {
+        refresh();
+      });
+    } else if(repeat==StatusRepeat.REPEAT_WEEKLY){
+      Tasks taskNew=task;
+      DateTime oldDate=new DateTime(task.dueDate);
+      DateTime nextWeek=new DateTime.now().add(new Duration(days: 7));
+      DateTime tomorowRepeated=new DateTime(nextWeek.year, nextWeek.month, nextWeek.day, oldDate.hour, oldDate.minute, oldDate.second, oldDate.millisecond, oldDate.microsecond);
       taskNew.dueDate=tomorowRepeated.millisecondsSinceEpoch;
       _taskDb.updateTask(taskNew).then((value) {
         refresh();

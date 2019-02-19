@@ -3,6 +3,7 @@ import 'package:flutter_app/pages/tasks/models/tasks.dart';
 import 'package:flutter_app/pages/projects/project.dart';
 import 'package:flutter_app/pages/labels/label.dart';
 import 'package:flutter_app/pages/tasks/models/task_labels.dart';
+import 'package:flutter_app/pages/tasks/models/task_enabled_days.dart';
 import 'package:sqflite/sqflite.dart';
 // import 'package:flutter/foundation.dart';
 
@@ -106,7 +107,7 @@ class TaskDB {
   }
 
   /// Inserts or replaces the task.
-  Future updateTask(Tasks task, {List<int> labelIDs}) async {
+  Future updateTask(Tasks task, {List<int> labelIDs, List<bool> selectedDays}) async {
     var db = await _appDatabase.getDb();
     await db.transaction((Transaction txn) async {
       int id = await txn.rawInsert('INSERT OR REPLACE INTO '
@@ -117,8 +118,31 @@ class TaskDB {
           txn.rawInsert('INSERT OR REPLACE INTO '
               '${TaskLabels.tblTaskLabel}(${TaskLabels.dbId},${TaskLabels.dbTaskId},${TaskLabels.dbLabelId})'
               ' VALUES(null, $id, $labelId)');
+        });  
+      }
+      if (id > 0 && selectedDays != null && selectedDays.length > 0) {
+        selectedDays.forEach((day) {
+          txn.rawInsert('INSERT OR REPLACE INTO '
+              '${TaskEnabledDays.tblTaskEnableDays}(${TaskEnabledDays.dbId},${TaskEnabledDays.dbTaskId},${TaskEnabledDays.dbEnabledDaysId})'
+              ' VALUES(null, $id, $day)');
         });
       }
     });
   }
+
+  //   Future updateTask(Tasks task, {List<int> labelIDs}, {}) async {
+  //   var db = await _appDatabase.getDb();
+  //   await db.transaction((Transaction txn) async {
+  //     int id = await txn.rawInsert('INSERT OR REPLACE INTO '
+  //         '${Tasks.tblTask}(${Tasks.dbId},${Tasks.dbTitle},${Tasks.dbProjectID},${Tasks.dbComment},${Tasks.dbDueDate},${Tasks.dbPriority},${Tasks.dbStatus},${Tasks.dbRepeat})'
+  //         ' VALUES(${task.id}, "${task.title}", ${task.projectId},"${task.comment}", ${task.dueDate},${task.priority.index},${task.tasksStatus.index},${task.repeat.index})');
+  //     if (id > 0 && labelIDs != null && labelIDs.length > 0) {
+  //       labelIDs.forEach((labelId) {
+  //         txn.rawInsert('INSERT OR REPLACE INTO '
+  //             '${TaskLabels.tblTaskLabel}(${TaskLabels.dbId},${TaskLabels.dbTaskId},${TaskLabels.dbLabelId})'
+  //             ' VALUES(null, $id, $labelId)');
+  //       });
+  //     }
+  //   });
+  // }
 }
