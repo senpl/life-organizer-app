@@ -4,6 +4,13 @@ import 'package:flutter_app/pages/tasks/models/tasks.dart';
 import 'package:flutter_app/utils/color_utils.dart';
 import 'package:flutter_app/utils/date_util.dart';
 import 'package:flutter_app/utils/app_constant.dart';
+import 'package:flutter_app/bloc/bloc_provider.dart';
+import 'package:flutter_app/pages/tasks/edit_task.dart';
+import 'package:flutter_app/pages/tasks/bloc/task_bloc.dart';
+import 'package:flutter_app/pages/tasks/task_db.dart';
+import 'package:flutter_app/pages/projects/project_db.dart';
+import 'package:flutter_app/pages/labels/label_db.dart';
+import 'package:flutter_app/pages/tasks/bloc/edit_task_bloc.dart';
 
 class TaskRow extends StatelessWidget {
   final Tasks tasks;
@@ -11,13 +18,22 @@ class TaskRow extends StatelessWidget {
   final List<String> labelNames = List();
 
   TaskRow(this.tasks);
+  final TaskBloc _taskBloc = TaskBloc(TaskDB.get());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //TODO to click something
-      },
+      onTap: () async {
+          var blocProviderEditTask = BlocProvider(
+            bloc: EditTaskBloc(TaskDB.get(), ProjectDB.get(), LabelDB.get()),
+            child: EditTaskScreen(),
+          );
+          await Navigator.push(
+            context,
+            MaterialPageRoute<bool>(builder: (context) => blocProviderEditTask),
+          );
+          _taskBloc.refresh();
+        },
       child: Column(
         children: <Widget>[
           Container(

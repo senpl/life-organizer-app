@@ -1,3 +1,8 @@
+☐ Dodać edycję wprowadzonych pól
+
+
+☐ nowy wpis nie ma zerowanych state'ów
+    ☐ w AddTask dodać czyszczenie stanu enabledDays
 ☐ dodać potwarzanie zadań najprościej
     ☐ powtarzanie codziennie na początek
         ☐ Niech pojawią się 2 przyciski
@@ -5,6 +10,17 @@
             ✔ Niech status będzie everyDay @done (February 6th 2019, 12:08)
             ✔ naprawić prawidłowe ustawianie repeat z valuesmap @done (February 6th 2019, 15:31)
             ✔ Dodać status custom, który będzie zmieniał co okręślony czas @done (February 6th 2019, 15:57)
+            ☐ Przekopiować powtarzanie z RepeatMe
+                ☐ Zaczynamy od weekly, więc mamy remainderType = 1
+                ☐ i enabledDays z przycisków
+                    ✔ Enabled days są widoczne @done (February 19th 2019, 11:21)
+                    ☐ Zapisać enabledDays do widzenia ich na liście
+                        ☐ podglądnąć
+                    ☐ wyświetlić je na liście
+                ☐ Niech to będzie wybieralne 2ma przyciskami jak w RepeatMe
+                ☐ Klikamy weekly pojawiają się przyciski dnia tygodnia? czy cała kontrolka ???
+                ☐ Niech pojawi się nowa kontrolka
+                ☐ Albo na jego bazie stworzyć coś jak w Tasks.org
             ☐ Niech po jej zaznaczeniu zadanie wykonane zmieni date due date na dzień następny
                 ☐ Dodać obsługę weekly i monthly ????
                 ✔ Dodać zadanie z EveryDay ustawionym @done (February 6th 2019, 16:03)
@@ -14,7 +30,18 @@
                     ✔ Wszystko mniejsze od godziny ma być skopiowane @done (February 6th 2019, 17:11)
     ☐ Powtarzanie w dni tygodnia na początek
     ☐ Niech po kliknięciu pojawi się kontrolka taka jak w Tasks.org ????
-
+☐ Repeat tasks
+    ☐ Dodać pola
+        ☐ Zobaczyć, jak te pola są robione
+            ☐ dodać polę repeatByDayOfWeek
+    ☐ przekopiować logikę z RepeatMe
+    ☐ Sprawdzić działanie
+    ☐ wysłać pool requesta
+☐ hiding tasks
+☐ sorting tasks
+☐ kopiowanie zadań np. z json'a i do json'a
+☐ Dark theme
+☐ Update dependencies
 ☐ podnieść narzędzia do Flutter'a 1.2, bo moze będzie coś szybciej ???
 ☐ Domyślnie niech zadania nie mają daty
 
