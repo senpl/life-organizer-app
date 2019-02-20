@@ -1,6 +1,6 @@
 ☐ Dodać edycję wprowadzonych pól
-
-
+    ☐ Dodać pobieranie z bazy wpisanych tam name, i enabled days
+    ☐ Dodać resztę pól, jak date, labels i takie tam
 ☐ nowy wpis nie ma zerowanych state'ów
     ☐ w AddTask dodać czyszczenie stanu enabledDays
 ☐ dodać potwarzanie zadań najprościej
